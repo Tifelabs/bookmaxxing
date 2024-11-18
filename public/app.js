@@ -22,7 +22,7 @@ import {
 // Firebase configuration
 const firebaseConfig = {
     // Your Firebase config object
-    apiKey: "AIzaSyAc1JO8Wx73S4w-em-uFPlJgNdQwPffWgE",
+    apiKey:  process.env.FIREBASE_API_KEY,
 
     authDomain: "bookmaxxing-1.firebaseapp.com",
   
