@@ -1,7 +1,8 @@
-const express = require('express');
-const path = require('path');
-const compression = require('compression');
-const helmet = require('helmet');
+import express from 'express';
+import path from 'path';
+import compression from 'compression';
+import helmet from 'helmet';
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -39,13 +40,14 @@ app.use((req, res, next) => {
 
 // Serve index.html for the root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
 });
 
 // Handle 404s
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
-});
+// app.use((req, res) => {
+//     res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+// });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
