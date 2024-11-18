@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bookmark Manager</h1>
+            <button id="signInBtn">Sign in with Google</button>
+            <button id="signOutBtn" style="display: none;">Sign Out</button>
+        </div>
+
+        <div class="upgrade-banner" id="upgradeBanner">
+            You've reached the maximum limit of 7 bookmarks. 
+            <button id="upgradeBtn">Upgrade for $5</button>
+        </div>
+
+        <form class="bookmark-form" id="bookmarkForm">
+            <div class="form-group">
+                <label for="url">URL:</label>
+                <input type="url" id="url" required>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" required>
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" required>
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="shopping">Shopping</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit">Add Bookmark</button>
+        </form>
+
+        <ul class="bookmark-list" id="bookmarkList"></ul>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
