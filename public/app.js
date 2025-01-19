@@ -1,3 +1,4 @@
+
 // Import Firebase modules
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.x.x/firebase-app.js';
 import { 
@@ -21,27 +22,19 @@ import {
 
 // Firebase configuration
 const firebaseConfig = {
-    // Your Firebase config object
-    apiKey:  process.env.FIREBASE_API_KEY,
-
+    apiKey: process.env.FIREBASE_API_KEY,
     authDomain: "bookmaxxing-1.firebaseapp.com",
-  
     projectId: "bookmaxxing-1",
-  
     storageBucket: "bookmaxxing-1.firebasestorage.app",
-  
     messagingSenderId: "96734768539",
-  
     appId: "1:96734768539:web:4af0d392c2c99af310053e",
-  
     measurementId: "G-GSQ86J0H7S"
-  
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getFirestore();
+const auth = getAuth(app);
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 // DOM elements
@@ -58,14 +51,14 @@ let isPremium = false;
 let bookmarkCount = 0;
 let draggedItem = null;
 
-// Authentication handlers
-signInBtn.addEventListener('click', handleSignIn);
-signOutBtn.addEventListener('click', handleSignOut);
-onAuthStateChanged(auth, handleAuthStateChange);
+// Event listeners
+signInBtn?.addEventListener('click', handleSignIn);
+signOutBtn?.addEventListener('click', handleSignOut);
+bookmarkForm?.addEventListener('submit', handleBookmarkSubmit);
+upgradeBtn?.addEventListener('click', handleUpgrade);
 
-// Form and upgrade handlers
-bookmarkForm.addEventListener('submit', handleBookmarkSubmit);
-upgradeBtn.addEventListener('click', handleUpgrade);
+// Auth state change handler
+onAuthStateChanged(auth, handleAuthStateChange);
 
 // Authentication functions
 async function handleSignIn() {
@@ -80,8 +73,7 @@ async function handleSignOut() {
     try {
         await signOut(auth);
         bookmarkList.innerHTML = '';
-        signInBtn.style.display = 'block';
-        signOutBtn.style.display = 'none';
+        toggleAuthButtons(false);
     } catch (error) {
         console.error('Error signing out:', error);
     }
@@ -90,11 +82,18 @@ async function handleSignOut() {
 function handleAuthStateChange(user) {
     currentUser = user;
     if (user) {
-        signInBtn.style.display = 'none';
-        signOutBtn.style.display = 'block';
+        toggleAuthButtons(true);
         loadBookmarks();
         checkPremiumStatus();
+    } else {
+        toggleAuthButtons(false);
     }
+}
+
+// Helper function to toggle auth buttons
+function toggleAuthButtons(isSignedIn) {
+    signInBtn.style.display = isSignedIn ? 'none' : 'block';
+    signOutBtn.style.display = isSignedIn ? 'block' : 'none';
 }
 
 // Bookmark management functions
@@ -241,13 +240,11 @@ function handleDragEnd(e) {
 
 // Premium management functions
 async function checkPremiumStatus() {
-    // In a real application, you would check the user's premium status in the database
-    // For this example, we'll use localStorage to simulate premium status
+    // Simulate premium status check
     isPremium = localStorage.getItem(`premium_${currentUser.uid}`) === 'true';
 }
 
 async function handleUpgrade() {
-    // In a real application, you would integrate with a payment processor here
     try {
         isPremium = true;
         localStorage.setItem(`premium_${currentUser.uid}`, 'true');
