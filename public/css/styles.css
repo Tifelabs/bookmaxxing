@@ -1,12 +1,8 @@
+/* Reset and base styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-h1{
-    font-family: cursive;
-    color: brown;
 }
 
 body {
@@ -16,11 +12,17 @@ body {
     background-color: #f5f5f5;
 }
 
+h1 {
+    font-family: cursive;
+    color: brown;
+}
+
+/* Container and layout */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: white;
     padding: 20px;
+    background-color: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -32,6 +34,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Form styles */
 .bookmark-form {
     margin-bottom: 20px;
     padding: 20px;
@@ -57,6 +60,7 @@ body {
     border-radius: 4px;
 }
 
+/* Button styles */
 button {
     background-color: #007bff;
     color: white;
@@ -75,6 +79,15 @@ button:disabled {
     cursor: not-allowed;
 }
 
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Bookmark list styles */
 .bookmark-list {
     list-style: none;
 }
@@ -95,18 +108,11 @@ button:disabled {
     background-color: #f8f9fa;
 }
 
-.delete-btn {
-    background-color: #dc3545;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
 .dragging {
     opacity: 0.5;
 }
 
+/* Upgrade banner */
 .upgrade-banner {
     background-color: #ffd700;
     padding: 15px;
