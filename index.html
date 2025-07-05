@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; form-action 'self' https://formspree.io; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Bookmaxxing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fafaf6;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+      color: #2a2a2a;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .signup-form input[type="email"] {
+      padding: 10px;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    .signup-form button {
+      padding: 10px 20px;
+      background-color: #2a2a2a;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .signup-form button:hover {
+      background-color: #4a4a4a;
+    }
+
+    .error-message {
+      color: #d32f2f;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .honeypot {
+      display: none;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.8rem;
+      color: #777;
+    }
+
+    footer a {
+      color: #777;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      .signup-form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .signup-form input[type="email"] {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bookmaxxing</h1>
+    <p>Coming soon. A new way to maximize your love for books.</p>
+    <form class="signup-form" action="https://formspree.io/f/meokwkoz" method="POST" onsubmit="return handleSubmit(event)">
+      <input type="email" name="email" id="email" placeholder="Enter your email" required autocomplete="off">
+      <input type="text" name="_gotcha" class="honeypot">
+      <input type="hidden" name="form-name" value="bookmaxxing-waitlist">
+      <button type="submit">Stay Updated</button>
+      <div class="error-message" id="error-message">Please enter a valid email address.</div>
+    </form>
+  </div>
+  <footer>
+    <p>© 2025 Bookmaxxing | <a href="#">Contact</a> | <a href="./Privacy/">Privacy Policy</a></p>
+  </footer>
+  <script>
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(email).toLowerCase().trim());
+    }
+
+    function handleSubmit(event) {
+      const emailInput = document.getElementById('email').value;
+      const errorMessage = document.getElementById('error-message');
+
+      if (!validateEmail(emailInput)) {
+        event.preventDefault();
+        errorMessage.style.display = 'block';
+        return false;
+      } else {
+        errorMessage.style.display = 'none';
+        return true; // Allow form submission to Formspree
+      }
+    }
+  </script>
+</body>
+</html>
